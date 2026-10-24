@@ -1,0 +1,5 @@
+#!/bin/sh
+# The pattern contract (scripts/check-patterns.mjs) for every commit, whichever
+# Claude session or terminal makes it. Enabled by install.sh
+# (git config core.hooksPath .githooks).
+exec node "$(git rev-parse --show-toplevel)/scripts/check-patterns.mjs"
