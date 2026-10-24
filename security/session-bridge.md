@@ -2,8 +2,9 @@
 sources:
   - https://raw.githubusercontent.com/OWASP/CheatSheetSeries/master/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.md
   - https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/http/reference/headers/set-cookie/index.md
-verified: 2026-10-22
+verified: 2026-10-24
 status: candidate
+worth: Handing a legacy server session to a new SPA and API has easy-to-miss holes (login CSRF, token replay, tokens in JS), checked against OWASP.
 ---
 
 # Session bridge: hand a legacy session to an SPA without tokens in JS
@@ -68,23 +69,24 @@ run end to end here.
    Forms")** `SameSite` on the new cookie doesn't help: the form post is a
    top-level navigation to our origin, so the cookie it gets back is first-party.
    **(opinion, not tested)** Fix: bind the token to the session that created it,
-   and reject exchange requests with `Sec-Fetch-Site: cross-site`, with an
-   `Origin` check as the fallback. **(docs: OWASP, Fetch Metadata and standard
-   headers)**
+   and reject exchange requests unless `Sec-Fetch-Site` is `same-origin`, with an
+   `Origin` check as the fallback when the header is missing. **(docs: OWASP,
+   Fetch Metadata and standard headers)**
 2. **Two sessions drift apart.** Signing out of the legacy app doesn't end the API
    session, and the reverse. Worst case: in a frameset someone signs out of the
    legacy app and another user signs in, while the SPA frame still runs as the
    first one. Fix: keep the legacy session hash in the API session and compare it
    on every request, or at least when the SPA loads; have legacy sign-out revoke
    the API session; align the idle timeouts. **(opinion)**
-3. **The bridge endpoint changes state.** Use `POST` or require a custom header,
-   rate-limit it, never log the token, purge expired rows. `SameSite=Lax` still
-   lets top-level `GET`s through, so a `GET` must never change state. **(docs:
-   OWASP, MDN)**
+3. **The bridge endpoint changes state.** Use `POST` or require a custom header.
+   **(docs: OWASP)** Rate-limit it, never log the token, purge expired rows.
+   **(opinion)** `SameSite=Lax` still lets top-level `GET`s through, so a `GET`
+   must never change state. **(docs: OWASP, MDN)**
 4. **A cookie-authenticated API needs CSRF protection beyond `SameSite`.**
-   `SameSite` works per site, so sibling subdomains count as same-site. Check
-   `Sec-Fetch-Site` with an `Origin` fallback, or use a CSRF token, on every
-   state-changing request. **(docs: OWASP)**
+   `SameSite` works per site, so sibling subdomains count as same-site. Accept a
+   state-changing request only with `Sec-Fetch-Site: same-origin`. When the
+   header is missing, require a matching `Origin` (or `Referer`) and reject if
+   neither is present, or use a CSRF token. **(docs: OWASP)**
 5. **Cookie prefix.** A `__Host-` name forces `Secure` and `Path=/` and forbids
    `Domain`, so another subdomain can't set or overwrite the cookie. It needs
    HTTPS. **(docs: MDN)**

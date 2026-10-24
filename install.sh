@@ -2,8 +2,9 @@
 #
 # Makes this repo's skills available in every Claude Code session on the
 # machine by symlinking them into ~/.claude/skills. Safe to re-run; it never
-# overwrites a real directory (it backs it up to .bak), and it removes only
-# links that point into this repo's skills/ and whose target is gone.
+# overwrites a real directory (it moves it to ~/.claude/skills-backup/, outside
+# the skills folder, where a copy would still load as a duplicate skill), and it
+# removes only links that point into this repo's skills/ and whose target is gone.
 #
 # Usage: ./install.sh            link
 #        ./install.sh --check    report only, change nothing (exit 1 on problems)
@@ -40,8 +41,10 @@ for src in "$REPO"/skills/*/; do
   if [ -L "$dest" ]; then
     rm "$dest"
   elif [ -e "$dest" ]; then
-    echo "  ! backing up $dest -> $dest.bak"
-    mv "$dest" "$dest.bak"
+    backup="$HOME/.claude/skills-backup/$name.$(date +%Y%m%d%H%M%S)"
+    mkdir -p "$(dirname "$backup")"
+    echo "  ! backing up $dest -> $backup"
+    mv "$dest" "$backup"
   fi
   ln -s "$target" "$dest"
   echo "  + $dest"
@@ -63,5 +66,17 @@ for l in "$SKILLS"/*; do
     echo "  - $l (stale: gone from repo)"
   fi
 done
+
+# Commit-time checks (.githooks/) apply to every commit, from any session or
+# terminal; Claude Code project hooks only run in sessions started in this repo.
+if [ "$(git -C "$REPO" config core.hooksPath)" = ".githooks" ]; then
+  echo "  = git core.hooksPath .githooks"
+elif [ "$CHECK" = 1 ]; then
+  echo "  ! git hooks are off (run ./install.sh)"
+  problems=$((problems + 1))
+else
+  git -C "$REPO" config core.hooksPath .githooks
+  echo "  + git core.hooksPath .githooks"
+fi
 
 [ "$problems" -eq 0 ] || exit 1

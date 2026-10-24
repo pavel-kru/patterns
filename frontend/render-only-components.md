@@ -4,6 +4,7 @@ sources:
   - https://raw.githubusercontent.com/eslint/eslint/main/docs/src/rules/no-restricted-syntax.md
 verified: 2026-10-22
 status: candidate
+worth: Two core ESLint rules keep logic out of components without a plugin, and a shrinking exception list makes the rollout feasible; verified in two repos.
 ---
 
 # Render-only components, enforced by lint

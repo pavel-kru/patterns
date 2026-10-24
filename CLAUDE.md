@@ -20,6 +20,7 @@ sources:            # official docs pages the pattern relies on (.md URLs)
 verified: 2026-10-21  # date of the last check
 claude_code: 2.1.303  # Claude Code version it was checked on
 status: proven      # or candidate
+worth: <one line>   # the trap or cost it saves, and the evidence
 ---
 ```
 
@@ -33,16 +34,24 @@ proven. Promote a candidate when it holds up a second time.
 At session start a hook runs `scripts/check-docs.mjs`. The script compares every
 cited page with the version it was verified against (`docs.lock.json`), and the
 installed Claude Code version with the newest `claude_code` in the patterns. It
-prints a report only when something changed.
+prints a report only when something changed. It also keeps a local snapshot of
+each verified page in `.cache/docs/` (not in git: third-party docs), so the
+report can point at a diff of what changed.
 
 When the report lists changes:
 
-1. Read each changed page. Fetch the `.md` URL itself, not a summary of it.
+1. Read what changed. Use the `git diff --no-index` command from the report when
+   it prints one. Without a snapshot, fetch the `.md` URL itself (not a summary)
+   and re-check every claim citing it.
 2. Update every pattern that cites the page. A claim the docs no longer support
    gets fixed or removed, never kept on trust.
 3. Re-verify what you can with `claude-code/verification.md`, then bump
-   `verified` and `claude_code` in the patterns you touched.
-4. Run `node scripts/check-docs.mjs --update-lock`.
+   `verified` in the patterns you checked. Bump `claude_code` only for behaviour
+   you re-observed on that version.
+4. Run `node scripts/check-docs.mjs --update-lock`. It records a changed page
+   only when every pattern citing it has today's `verified` date; otherwise it
+   refuses that page and exits 1, so a page can't be marked current without its
+   patterns being re-checked.
 
 If the report says the docs can't be reached, treat the patterns as unverified for
 this session and say so when you rely on one.
@@ -61,8 +70,19 @@ this session and say so when you rely on one.
 They run only in sessions started here. From anywhere else, the `patterns` skill
 (`skills/`, linked by `install.sh`) carries the same rules as text.
 
+One check doesn't depend on the session: the git pre-commit hook
+(`.githooks/pre-commit`, enabled by `install.sh` through `core.hooksPath`) runs
+`scripts/check-patterns.mjs` on every commit. It rejects a pattern that lacks
+`sources`, `verified`, `status` or `worth`, has no README row or no evidence
+labels, or is `proven` without a (verified) claim. It also rejects a README row
+whose file is gone.
+
 ## Writing or editing a pattern
 
+- Only what earns its place: non-obvious, reusable, backed by at least one
+  verified claim, and not covered yet. Say plainly when a candidate fails that
+  test, and don't write it. The `worth:` line records why it passed. The full
+  test is in the `patterns` skill.
 - One topic per file, with the front-matter above.
 - One folder per domain, created with its first pattern, never before. A new
   domain also gets a README section and a `skills/patterns-<domain>/` skill, and

@@ -3,6 +3,7 @@ sources: []
 verified: 2026-10-21
 claude_code: 2.1.303
 status: proven
+worth: Traps that each cost real time to diagnose, each with a fix that was verified.
 ---
 
 # Pitfalls
