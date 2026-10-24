@@ -1,6 +1,6 @@
 ---
 name: patterns-frontend
-description: The user's front-end patterns, in ~/patterns/frontend/ - architecture rules enforced by tooling, such as Feature-Sliced Design layer and public-API rules as eslint-plugin-boundaries errors, with a canary test for silent failures. Use when setting up or reviewing FSD, import boundaries or ESLint architecture rules in a front-end repo.
+description: The user's front-end patterns, in ~/patterns/frontend/ - architecture rules enforced by tooling (Feature-Sliced Design layer and public-API rules as eslint-plugin-boundaries errors, render-only components), bundle size and caching (barrels and sideEffects, vendor chunks, hash cascade and import maps, mock servers kept out of production builds), and form labels and accessible names (Chrome's form issues, group captions, default ids). Use when setting up or reviewing FSD, ESLint architecture rules, Vite/Rolldown bundle splitting, startup JS budgets, MSW in builds, or form accessibility in a front-end repo.
 ---
 
 # Front-end patterns (~/patterns/frontend)

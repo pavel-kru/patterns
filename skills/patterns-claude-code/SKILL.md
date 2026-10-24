@@ -1,6 +1,6 @@
 ---
 name: patterns-claude-code
-description: The user's verified patterns for running Claude Code agents, in ~/patterns (claude-code/, instruction-design.md, pipelines.md, pitfalls.md) - which instruction files load when (CLAUDE.md, imports, rules with paths, skills, settings), what wins when instructions disagree, enforcing rules with hooks, sessions spanning several repos, multi-agent pipelines, and proving what a session loaded. Use when setting up or debugging CLAUDE.md, rules, skills, hooks or settings, or when designing an agent workflow.
+description: The user's verified patterns for running Claude Code agents, in ~/patterns (claude-code/, pipelines.md, pitfalls.md) - which instruction files load when (CLAUDE.md, imports, rules with paths, skills, settings), what wins when instructions disagree, enforcing rules with hooks, sessions spanning several repos, multi-agent pipelines, and proving what a session loaded. Use when setting up or debugging CLAUDE.md, rules, skills, hooks or settings, or when designing an agent workflow.
 ---
 
 # Claude Code agent patterns (~/patterns)

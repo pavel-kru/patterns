@@ -5,8 +5,9 @@ sources:
   - https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/rules/dependencies.md
   - https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/classification/elements.md
   - https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/guides/typescript-support.md
-verified: 2026-10-22
+verified: 2026-10-24
 status: proven
+worth: A misconfigured eslint-plugin-boundaries setup passes silently; the canary test catches it, and the config was verified in three repos.
 ---
 
 # FSD layer rules as ESLint errors
@@ -205,10 +206,13 @@ first. **(opinion)**
   build pass, and the behaviour is unchanged)** Calling it from a hook's effect
   instead would let requests fire before the getter is set. **(opinion)**
 - **eslint-plugin-boundaries 7.2.0 pulls in `handlebars` 4.7.9**, which has
-  critical advisories. 7.2.1 bumps it, or you can override `handlebars` to 4.7.10.
-  `braces` (via `micromatch`) still reports a high DoS advisory, and no patched
-  version exists. The plugin only uses these on patterns from your own config.
-  **(verified: `npm audit` on 2026-10-22; the exposure is opinion)**
+  critical advisories, and `braces` (via `micromatch`), which has a high DoS
+  advisory with no patched version. Use 7.3.0 or later: it ships `handlebars`
+  4.7.10 and replaced `micromatch` with `picomatch`, so `braces` is gone.
+  **(verified: `npm audit` on 2026-10-22 for 7.2.0; `npm view` and `npm audit`
+  of a 7.3.0 lockfile on 2026-10-24, 0 advisories)** Before 7.3.0 the plugin
+  used these only on patterns from your own config. **(opinion)** The checks
+  above ran on 7.2.0; re-run the canary after upgrading. **(opinion)**
 
 ## The canary test
 
