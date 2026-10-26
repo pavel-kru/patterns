@@ -16,6 +16,7 @@ reviewed or reasoned, not yet proven.
 | `claude-code/verification.md` | proven | Proving what was loaded or enforced, using transcripts instead of the model's word |
 | `claude-code/sharing.md` | proven | Sharing knowledge across sessions, projects and machines: skills, overlays, sync |
 | `pipelines.md` | candidate | Multi-agent pipelines: hand-offs, isolation, parallel sessions, gates |
+| `cross-repo-asks.md` | candidate | What one side of a multi-repo build owes another: one ledger per receiving side, scoped by ticket, with status and permanent ids |
 | `pitfalls.md` | proven | Traps that cost real time, with the fix |
 
 ## This repo's tooling

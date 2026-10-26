@@ -50,6 +50,18 @@ set in `settings.json` under `env`. **(verified)**
   `git switch -c fix/x` there would have stacked the fix on it. Fetch, then
   branch every repo from the remote default explicitly:
   `git switch -c fix/x origin/main`. **(practice; the stray branch was observed)**
+- **Don't switch the branch of a sibling checkout another session may be
+  using.** Its working tree is shared. After a cross-repo change ran
+  `git switch -c` in a sibling repo with a clean tree, another session went on
+  editing there, and its uncommitted edits landed on the new branch. That
+  session saw no warning. Switching back refused ("would be overwritten") for a
+  file that differs between the branches; `git switch --merge <its branch>`
+  moved the edits back with a three-way merge. **(verified: observed)** For a
+  cross-repo change, branch in a worktree outside every checkout instead:
+  `git -C <repo> worktree add <absolute path> -b <branch> origin/main`.
+  - Give `worktree add` an absolute path. With `git -C <repo>`, a relative path
+    resolves against `<repo>`, not your shell's directory, and the worktree
+    lands inside that checkout. **(verified: observed)**
 - For one declarative entry point, use a root repo with the others cloned inside
   it and listed in its `.gitignore`. It costs a migration of everyone's paths.
 - Plugins (a marketplace plus `enabledPlugins` in each repo's settings) can ship
