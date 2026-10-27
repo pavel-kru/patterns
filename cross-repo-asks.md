@@ -122,6 +122,19 @@ says which asks it filed or closed. **(verified: applied)** The hand-over
 (ticket comment to the other side) takes its scope from the section the asks
 sit in. **(verified: applied)**
 
+### Renaming a ledger that a workflow mirrors to a tracker
+
+When a workflow mirrors each ledger file into a tracker task (it finds the open
+task by a label per side), renaming the files and docs is safe, but:
+
+- Keep the label the workflow matches on. Renamed, it orphans the open task, and
+  the next push files a duplicate. With the old label kept, the first sync after
+  the rename commented on the existing task. **(verified: applied)** Say in the
+  docs why the label keeps the old name.
+- A sync that lists changed files with `git diff --no-renames` sees the moved
+  file as new, so the open task gets one comment holding the whole file.
+  **(verified: observed)** Expect it, and say so in the rename PR.
+
 ## Seeding it
 
 Re-check every old item against the other side's `main` rather than copying
