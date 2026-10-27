@@ -1,6 +1,6 @@
 ---
 sources: []
-verified: 2026-10-26
+verified: 2026-10-27
 status: candidate
 worth: A "what the other side owes us" list kept in the asking repo, deleted item by item and without scope or status, silently rots; a re-check found most of its points already delivered and a live bug buried among them. One ledger per receiving side, scoped by ticket and with a status line per ask, keeps it honest.
 ---
@@ -41,13 +41,17 @@ whose hand-over should mention it.
 ```
 <pipeline repo>/asks/
   README.md          # the rules, once
-  <side-a>-asks.md   # what <side-a> owes the others   (ids A-<n>)
-  <side-b>-asks.md   # what <side-b> owes the others   (ids B-<n>)
-  <qa>-asks.md       # what the test suite owes        (ids Q-<n>)
+  <side-a>-todo.md   # what <side-a> owes the others   (ids A-<n>)
+  <side-b>-todo.md   # what <side-b> owes the others   (ids B-<n>)
+  <qa>-todo.md       # what the test suite owes        (ids Q-<n>)
 ```
 
 Name each file after **the side that has to act**, not the side that asks, so
-"what do I owe" is one file to read. Anyone files into any of them. Put them in
+"what do I owe" is one file to read. Call it that side's to-do list
+(`<side>-todo.md`). `<side>-asks.md` reads as "what this side asks for", the
+opposite of what the file holds, and it was renamed after one day for being
+unclear. An entry is still an "ask", with its id. **(verified: applied; the
+naming advice itself is opinion)** Anyone files into any of the files. Put them in
 the shared pipeline or meta repo rather than in one of the build repos, so the
 ledger doesn't belong to either party. **(verified: applied)**
 
@@ -70,7 +74,7 @@ the reference it relies on, and how to close it.
   says what's left), `done` (with the PR or commit), `dropped` (with why and who
   decided). **(verified: applied)**
 - A status line under every heading turns "what's still open" into one grep
-  (`grep -B1 '· \*\*open\*\*' asks/*-asks.md`). With that, a script can check
+  (`grep -B1 '· \*\*open\*\*' asks/*-todo.md`). With that, a script can check
   that every ask has a valid status and that every cross-reference resolves.
   **(verified: applied, 128 asks checked)**
 - One question, one ask. A bundle of "open points" under one id can't be
