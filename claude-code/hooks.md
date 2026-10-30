@@ -6,7 +6,7 @@ sources:
   - https://code.claude.com/docs/en/permissions.md
   - https://code.claude.com/docs/en/env-vars.md
   - https://code.claude.com/docs/en/cli-reference.md
-verified: 2026-10-24
+verified: 2026-10-30
 claude_code: 2.1.303
 status: proven
 worth: Instructions only ask; this shows what a hook can actually block in a turn (git hooks run inside the Bash call, Stop loop guards) and what slips through, verified in real sessions.
@@ -14,7 +14,8 @@ worth: Instructions only ask; this shows what a hook can actually block in a tur
 
 # Enforcing rules with hooks
 
-CLAUDE.md asks; hooks make sure. **(docs: "advisory" vs "deterministic")**
+CLAUDE.md asks; hooks make sure. **(docs: best-practices, "non-deterministic"
+vs "deterministic" instructions)**
 
 ## Where hooks sit in a turn
 
@@ -43,7 +44,10 @@ UserPromptSubmit → model picks a tool → PreToolUse → permission check → 
 - Prefer exec form: `"command": "node", "args": ["${CLAUDE_PROJECT_DIR}/…"]`.
   It uses no shell, so the path needs no quoting. Shell form (no `args`) runs
   under `sh -c` on macOS and Linux and under Git Bash (or PowerShell without it)
-  on Windows; there, wrap the placeholder in double quotes. **(docs)**
+  on Windows; there, wrap the placeholder in double quotes. **(docs)** Under
+  PowerShell, a `command` that is only a quoted string is printed, not run
+  ("PowerShell started no program"): use exec form, or `"shell": "powershell"`
+  with `&` before the quoted path. **(docs)**
 - **Project hooks load from the session's primary working directory:** where it
   started, or where `/cd` moved it. There is no fallback to parent folders, and
   `--add-dir` brings no hooks. A session in repo A doesn't run repo B's hooks,

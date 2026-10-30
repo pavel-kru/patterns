@@ -4,7 +4,7 @@ sources:
   - https://code.claude.com/docs/en/settings.md
   - https://code.claude.com/docs/en/skills.md
   - https://code.claude.com/docs/en/permissions.md
-verified: 2026-10-24
+verified: 2026-10-30
 claude_code: 2.1.303
 status: proven
 worth: Sibling repos silently lose their CLAUDE.md, rules and hooks; one verified table per layout that the docs do not give in one place.

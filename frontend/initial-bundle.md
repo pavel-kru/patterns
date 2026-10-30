@@ -5,7 +5,7 @@ sources:
   - https://raw.githubusercontent.com/vitejs/vite/main/docs/config/build-options.md
   - https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/html/reference/elements/script/type/importmap/index.md
   - https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/html/reference/attributes/rel/modulepreload/index.md
-verified: 2026-10-23
+verified: 2026-10-30
 status: proven
 worth: Barrels with module-level styled calls silently put shared UI into startup, a catch-all vendor group doubled it and an app-only deploy renamed every lazy chunk; all measured.
 ---

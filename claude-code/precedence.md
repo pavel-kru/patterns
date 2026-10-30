@@ -2,7 +2,7 @@
 sources:
   - https://code.claude.com/docs/en/memory.md
   - https://code.claude.com/docs/en/best-practices.md
-verified: 2026-10-24
+verified: 2026-10-30
 claude_code: 2.1.303
 status: candidate
 worth: Nothing ranks conflicting instructions, though most setups assume something does; adds a tie-break that held in practice.
@@ -31,8 +31,9 @@ other the model may pick either one. **(docs)**
    other. **(opinion, from that case)**
 2. **Move invariants into mechanics:** hooks, linters, tests, generated contracts.
    When docs disagree with a mechanism, the mechanism decides. **(opinion;
-   docs: settings are enforced by the client, CLAUDE.md is not a hard
-   enforcement layer)**
+   docs: CLAUDE.md is "context, not enforced configuration" (memory); hooks,
+   deny rules and managed settings are the deterministic kind
+   (best-practices))**
 3. **Check Claude Code's own guidance.** Your rule may compete with instructions
    Claude Code adds itself, such as its commit and PR conventions. Switch the
    built-in off in settings (`includeGitInstructions`, `attribution`) rather than

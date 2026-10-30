@@ -5,7 +5,7 @@ sources:
   - https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/rules/dependencies.md
   - https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/classification/elements.md
   - https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/guides/typescript-support.md
-verified: 2026-10-24
+verified: 2026-10-30
 status: proven
 worth: A misconfigured eslint-plugin-boundaries setup passes silently; the canary test catches it, and the config was verified in three repos.
 ---
