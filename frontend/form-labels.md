@@ -77,6 +77,18 @@ through client-side navigation to size the problem before writing the ticket.
    and render a plain `<label>` inside the styled wrapper. **(verified with one
    such library)**
 
+## Don't name a group twice
+
+A titled `<section aria-labelledby>` (a panel with a heading) is a region
+landmark. A checkbox set inside it with its own `role="group"` and the same
+words as its `aria-label` is announced twice: region "Include:", then group
+"Include". Make the titled panel itself the group (`role="group"` on the
+section, still named by its heading) and drop the inner group. Inside a field
+wrapper that is already a group (fix 1), just drop the inner role. Keep the
+visible caption as the name, so the name matches the label people see.
+**(verified: Chrome's accessibility tree showed a region holding a same-named
+group before, and a single group after; a unit test asserts no nested group)**
+
 ## Keep the tests honest
 
 - Before renaming anything, check how the e2e suite finds these controls. Here

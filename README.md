@@ -17,7 +17,7 @@ reviewed or reasoned, not yet proven.
 | `claude-code/sharing.md` | proven | Sharing knowledge across sessions, projects and machines: skills, overlays, sync |
 | `pipelines.md` | candidate | Multi-agent pipelines: hand-offs, isolation, parallel sessions, gates |
 | `atomic-commits.md` | proven | One concern per commit, every commit green: splitting mixed work without `git add -p`, the lint-staged and commitlint traps, a per-commit check loop |
-| `cross-repo-asks.md` | candidate | What one side of a multi-repo build owes another: one ledger per receiving side, scoped by ticket, with status and permanent ids |
+| `cross-repo-todo.md` | candidate | What one side of a multi-repo build owes another: one ledger per receiving side, scoped by ticket, with status and permanent ids |
 | `pitfalls.md` | proven | Traps that cost real time, with the fix |
 
 ## This repo's tooling
@@ -44,7 +44,7 @@ reviewed or reasoned, not yet proven.
 | File | Status | What it answers |
 |---|---|---|
 | `frontend/fsd-boundaries.md` | proven | Feature-Sliced Design layer and public-API rules as ESLint errors (eslint-plugin-boundaries), the traps that turn them silently green, and a canary test |
-| `frontend/render-only-components.md` | candidate | Keeping state, effects and data access out of slice components with two core ESLint rules, and rolling that out with a shrinking exception list |
+| `frontend/render-only-components.md` | candidate | Keeping state, effects and data access out of slice components with two core ESLint rules, rolling that out with a shrinking exception list, and the flat-config merge that silently drops a second block's ban |
 | `frontend/initial-bundle.md` | proven | Keeping startup JS flat as pages are added: barrels and `sideEffects`, explicit vendor groups, proving cache stability, the hash cascade and import maps, proving nothing visible changed |
 | `frontend/mocks-out-of-production.md` | proven | Keeping a browser mock server out of production builds, a build plugin that fails if it leaks, smoke-testing the real bundle on mocks |
 | `frontend/form-labels.md` | proven | What Chrome's form label and id/name issues really mean, an audit that reproduces its counts, group captions, default ids, CSS-in-JS dropping `htmlFor` |

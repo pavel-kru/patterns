@@ -15,6 +15,33 @@ MSW turns the XHR into a Node `Request`, and a multipart body built from a jsdom
 `"[object File]"`. Fix: stub the upload call in that test. Real browsers are
 fine. **(verified)**
 
+**Highlight code is a no-op under jsdom.** jsdom has no CSS Custom Highlight API:
+`Highlight` is undefined and `CSS.highlights` is missing, although `CSS` exists.
+Code that checks for them, as it must for older browsers, silently does nothing
+in tests, so a highlight on the wrong text passes them all. In one case a find
+feature counted its hits in the page body but looked for the range in the whole
+page, so a page header containing the search word took the first highlight. No
+test noticed until the API was stubbed:
+
+```ts
+const highlights = new Map<string, { range: Range }>();
+vi.stubGlobal('Highlight', class { constructor(public range: Range) {} });
+vi.stubGlobal('CSS', { highlights });
+// … search, then
+expect(highlights.get('find')?.range.startContainer.textContent).toBe('Back rent due');
+vi.unstubAllGlobals();
+```
+
+Count the hits and look for the range in the same DOM subtree. **(verified: jsdom
+30.1.3; the stubbed test failed before the fix and passed after it)**
+
+**A partial `vi.mock` typed with `import()` fails `consistent-type-imports`.**
+`importOriginal<typeof import('./lib')>()` is an `import()` type annotation,
+which typescript-eslint's `consistent-type-imports` rejects by default. Import
+the module's type instead: `import type * as Lib from './lib'`, then
+`importOriginal<typeof Lib>()`. **(verified: Vitest 5.0.5, typescript-eslint
+8.71.2)**
+
 **Symlinked `node_modules` in a worktree shares more than packages.** It also
 shares the caches (`node_modules/.vite`, a `tsBuildInfoFile` under
 `node_modules`). In one run the symlink disappeared mid-run, and 47 test files
