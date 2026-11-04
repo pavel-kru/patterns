@@ -5,7 +5,7 @@ sources:
   - https://code.claude.com/docs/en/sessions.md
   - https://code.claude.com/docs/en/headless.md
   - https://code.claude.com/docs/en/hooks.md
-verified: 2026-10-24
+verified: 2026-10-30
 claude_code: 2.1.303
 status: proven
 worth: Models misreport their own context; transcripts give evidence instead, and caught a real wrong answer.

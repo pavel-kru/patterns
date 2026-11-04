@@ -1,22 +1,22 @@
 {
   "pages": {
     "https://code.claude.com/docs/en/hooks.md": {
-      "sha256": "47ffc799070326108bbd3811db73d26f9a4cd68168078095d923a2ba710fdd8a"
+      "sha256": "b755d9c7c166ec77e36ee2388e3299dd149a9f160171b6e97e427be439f942f9"
     },
     "https://code.claude.com/docs/en/hooks-guide.md": {
-      "sha256": "14bcf3cd102f06c93f179123709b9179b8ed22c778274e16537aa3b27815b95d"
+      "sha256": "0449c1803dceb093fd2edfbdfcbff33e522d16268952822f7a8715e0590d6fe2"
     },
     "https://code.claude.com/docs/en/memory.md": {
-      "sha256": "02632438e022b5fc70b470b02d59819d9739756c2666b5632734b4564a08a801"
+      "sha256": "f19bb5aa909fe5588d523cf302a0e15ed5950ca689fbb73bd932c315ec764a49"
     },
     "https://code.claude.com/docs/en/skills.md": {
-      "sha256": "acb1f1388ee96a516f707c42bac1e834b22df90081e5c2eccb90a2f76a5430f6"
+      "sha256": "907a9929f54ad8b730a55088108311acb9bb5677c33b1861fb2664a53ab15688"
     },
     "https://code.claude.com/docs/en/settings.md": {
-      "sha256": "0b062367ed54712ecd9e1a3d6b5d67e4eedc860e01962202176ce5e48f1915dc"
+      "sha256": "70064d76e67c335615d678ee493c16e9315e89a17813c31365ffbca673f89d11"
     },
     "https://code.claude.com/docs/en/best-practices.md": {
-      "sha256": "f024b9d1610ab3c39c94a18efb0d3b505a8bf18f7735051481298402b2eab699"
+      "sha256": "3a737bc6ffa82ea2aae5c6c19047d1c8e74a517fea82ce809ea92f2f9175c7ba"
     },
     "https://code.claude.com/docs/en/cli-reference.md": {
       "sha256": "9a68c8f3c42d6b42031f6b3080f9a6c32e86aac6fb3f2ffb1aaae1abeb3d4f07"
@@ -31,7 +31,7 @@
       "sha256": "fc1ee18222fa78d2c9e405fc0916dbdfcb0a2ae0d5c6678ae4e2b72357601639"
     },
     "https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/classification/elements.md": {
-      "sha256": "2a6c1b5cdcb97ef4a69cefa8622e220a52462d0e8abea93f81b25d99f2d709e5"
+      "sha256": "bbed2b08a34209808cf558ac85be1fe74e2eb188e03aaedf087b6542188baea5"
     },
     "https://raw.githubusercontent.com/javierbrea/eslint-plugin-boundaries/master/packages/website/docs/guides/typescript-support.md": {
       "sha256": "650efddaba7617a436f34af21d06f343c49d18d36e751bb64594666c1470ce15"
@@ -52,7 +52,7 @@
       "sha256": "9407fc5ceb831a47aa7df989e494c3fe8f7c6ad596f49267a545ad8586d0031a"
     },
     "https://raw.githubusercontent.com/rolldown/rolldown/main/docs/in-depth/manual-code-splitting.md": {
-      "sha256": "beffce7e715a9aaea7c58cb1af6766686ed9c3b821ddaa2744616798e787d04b"
+      "sha256": "e1da5bfb3f6e408b6e78fc61ee6f012df784afa24d42b88e2b541d6c80bfe8e9"
     },
     "https://raw.githubusercontent.com/vitejs/vite/main/docs/config/build-options.md": {
       "sha256": "5e30ebe7cc8650a43f75faf4853fff5d09db2c15d6c5ab78b804e9cbb54577e6"
@@ -76,19 +76,19 @@
       "sha256": "7f8f384552f236e84a49b4f09a15759b4cb5c517a46c205953200cd8ba909067"
     },
     "https://code.claude.com/docs/en/permissions.md": {
-      "sha256": "c161181cf0bb4989c68a81c89e4f5a8e59bcd689ae62f7d51af1b32949a9a335"
+      "sha256": "a72bafb46a558dec5a641916b6f1482b101a8b4ca7602f0a2d3fb636b0b3c25c"
     },
     "https://code.claude.com/docs/en/env-vars.md": {
-      "sha256": "103e5e521a7f0893b65f93fd4184e1b06220a54b51bb3b6ad1070d24706a97d7"
+      "sha256": "3c8515ed6074b08f0ff6e2961d73c97affbc596afbab7c089bef91f42db9a185"
     },
     "https://code.claude.com/docs/en/errors.md": {
-      "sha256": "bf901502940532ed4306a33fedd572ab445919fc401bef5d8ac859ce70809440"
+      "sha256": "12744692edc820d64807a2e11085a6e288a7e8b6d25ba28fe5418617a5338766"
     },
     "https://code.claude.com/docs/en/sessions.md": {
-      "sha256": "d5861713756f734bb93d8313be530f446f27971bd1c05b62bab33f4aa080431b"
+      "sha256": "7f989a108c73825c8459d1e4563f4f2dae9a80e1aed1b0e8602016335d85cd44"
     },
     "https://code.claude.com/docs/en/headless.md": {
-      "sha256": "ed2edc127790a5d3db14e1224887002e322880ff4e1bba92b121750c6ccfb05d"
+      "sha256": "208eeb28afce5a433539821ec42ad3b077bb76420ee7ce6e21ce9cbe08cc2054"
     }
   }
 }

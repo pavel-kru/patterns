@@ -3,7 +3,7 @@ sources:
   - https://code.claude.com/docs/en/memory.md
   - https://code.claude.com/docs/en/skills.md
   - https://code.claude.com/docs/en/settings.md
-verified: 2026-10-24
+verified: 2026-10-30
 claude_code: 2.1.303
 status: proven
 worth: Which instruction files reach the model, and when, is spread over several docs pages and partly undocumented; checked with transcripts rather than the model word.

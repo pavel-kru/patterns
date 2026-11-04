@@ -5,7 +5,7 @@ sources:
   - https://code.claude.com/docs/en/settings.md
   - https://code.claude.com/docs/en/permissions.md
   - https://code.claude.com/docs/en/errors.md
-verified: 2026-10-24
+verified: 2026-10-30
 claude_code: 2.1.303
 status: proven
 worth: Picks the carrier (CLAUDE.md, skills, memory, hooks, settings) by reach, context cost and enforcement, with a verified way to sync skills across machines.
@@ -40,6 +40,9 @@ In a test the model took the repo path from the description and grepped the repo
 directly, without invoking the skill. **(verified, n=1)** So:
 - put **where** (paths) and **when** (triggers) in the description;
 - put the procedure (steps, rules for contributing) in the body;
+- write a placeholder as `[name]` or move it to `argument-hint`, not `<name>`:
+  angle brackets in `description` and `when_to_use` show as `&lt;` and `&gt;`.
+  **(docs)**
 - keep anything that must hold, such as "don't commit unprompted", in hooks or
   in the user's memory as well, because a skill that is never invoked can't
   enforce it.
