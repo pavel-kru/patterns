@@ -58,6 +58,25 @@ export const uiLogicRules = {
 - `allowTypeImports` lets a component take a generated API type for its props.
   **(docs; verified)**
 
+## One rule, one block
+
+Flat config merges the config objects that match a file rule by rule. A later
+object that sets the same rule with options **replaces** the earlier options; it
+doesn't add to their `paths` or `patterns`. So a second `no-restricted-imports`
+block, such as a bundle ban on heavy libraries or a ban on importing test
+helpers into app code, silently switches off this block's patterns for the files
+both match. A later entry that sets only the severity (`'warn'`) keeps the
+earlier options. **(verified: ESLint 10.12; `--print-config` showed only the
+second block's patterns, and the first block's ban stopped reporting)**
+
+Keep every pattern for a set of files in one block, or build the options from
+shared arrays, and say so in a comment next to the block. Before and after a
+config refactor (moving globs into a constant, changing the config API), diff
+`eslint --print-config <file>` for one file of each kind: component, test, mock
+and test helper. Identical output proves the refactor changed nothing.
+**(verified: four file kinds byte-identical after replacing `tseslint.config()`
+with `defineConfig()`)**
+
 ## Rolling it out to a repo that doesn't comply
 
 - Turn the rule on as an error and list the files that fail in `ignores`. New
