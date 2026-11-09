@@ -68,3 +68,35 @@ measured, hence `candidate`.
 - Put CI on every PR. Without it, a red `main` goes unnoticed, and every agent
   that runs the checks then tries to "fix" a failure it didn't cause.
   **(opinion; the pipeline ran without CI when this was written)**
+
+## Cost: decide where the context is, execute in a cheap subagent
+
+- A skill's cost is mostly the conversation it runs in, not its own text: every
+  tool call re-sends the whole context. On 46 runs of a ship-a-PR skill (commit,
+  push, create, merge, ticket updates) the median run started at 157k tokens of
+  context and made 27.5 model calls, about 4.9M input tokens; the skill text
+  (~3.3k tokens) was about 2% of the starting context, so trimming it barely
+  helps. **(verified: transcript analysis, Claude Code 2.1.296)**
+- `context: fork` is not the fix when the skill needs the conversation: it
+  starts a new subagent with the skill content as its prompt and no history.
+  **(docs)** A PR skill needs the history to know which files the work touched
+  and why it was done.
+- Split instead. The main thread makes the decisions that need the history
+  (repos, exact paths to stage, commit message, PR title, a description file)
+  and writes them into a short brief. A custom subagent on a cheap model
+  (`model: haiku` in `~/.claude/agents/<name>.md`) runs the mechanical steps
+  from the brief with a small context. It stops and reports on anything the
+  brief doesn't settle (a failed hook, a denied command, a missing value)
+  rather than improvising. **(opinion; applied 2026-11-09, savings not measured
+  yet)**
+- Chain the steps that always go together into one call (`git add && git
+  commit && git push`: the commit hook still gates the push). Keep a step the
+  permission check may deny, such as a merge, in a call of its own: a denied
+  call is denied whole, so a chained create-and-merge would lose the create
+  too. **(verified: auto mode denied a merge command as "Merge Without
+  Review"; opinion: the split)**
+- When measuring from transcripts, a human turn's `content` is either a string
+  or a list of `text` blocks, and tool results are user messages too. Ending a
+  run only on string turns folded later, unrelated work into the skill's runs
+  and more than doubled the median calls (66 instead of 27.5). **(verified)**
+

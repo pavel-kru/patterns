@@ -52,6 +52,9 @@ worth: Which instruction files reach the model, and when, is spread over several
 - Skills in a nested `.claude/skills/` appear after the first touch of a file in
   that subdirectory, or right away with `/add-dir <subdir>`. **(docs;
   observed)**
+- A subagent file written to `~/.claude/agents/` mid-session showed up as a new
+  agent type in that same session, without a restart. **(verified: Claude Code
+  2.1.296, the session announced the new type)**
 - Files that load on demand are cut off past about 40,000 characters (v2.1.309+),
   with a note to Read the rest. **(docs)**
 
