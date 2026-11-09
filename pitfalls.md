@@ -95,6 +95,23 @@ bash 3.2.57 verified on macOS)**
 **Testing hooks from zsh.** zsh's `echo` expands `\n` inside JSON and produces
 invalid input or output. Pipe JSON with `printf '%s'`. **(verified)**
 
+**A CLI that wants an env-var prefix breaks your allow rules.** Some CLIs tell
+agents to run `FOO=1 tool …`. An allow rule doesn't match past an assignment of
+a variable outside a short built-in safe list, so `Bash(tool get *)` stops
+matching and every call prompts again. **(docs)** Set the variable once in the
+`env` block of `settings.json` instead: it reached the Bash tool's shell in the
+same session, without a restart. **(verified: Claude Code 2.1.296)**
+
+**A "redacted" dump of a credentials file leaked the tokens.** The script masked
+secret-looking keys in objects but didn't descend into lists, and the login
+profiles were a list, so an OAuth access token, its refresh token and an API
+token went into the transcript and all had to be rotated. Never print a
+credentials file, even filtered: read the one non-secret field you need, or
+print booleans (`token stored: True`, `is the old token: False`). Auto mode
+also refuses a command with a secret typed into it ("Credential Leakage"), so
+the user runs the check that a leaked token is revoked, with `read -rs T` to
+keep it out of shell history. **(verified)**
+
 **Allowlists can remove a decision point.** A `Bash(git commit *)` allow rule
 meant commits never showed up as a prompt, and seven unreviewed commits landed.
 Prefer a hook that asks the user over an allowlist entry. **(practice)**
