@@ -47,6 +47,7 @@ reviewed or reasoned, not yet proven.
 | `frontend/render-only-components.md` | candidate | Keeping state, effects and data access out of slice components with two core ESLint rules, rolling that out with a shrinking exception list, and the flat-config merge that silently drops a second block's ban |
 | `frontend/initial-bundle.md` | proven | Keeping startup JS flat as pages are added: barrels and `sideEffects`, explicit vendor groups, proving cache stability, the hash cascade and import maps, proving nothing visible changed |
 | `frontend/mocks-out-of-production.md` | proven | Keeping a browser mock server out of production builds, a build plugin that fails if it leaks, smoke-testing the real bundle on mocks |
+| `frontend/typed-api-contract.md` | proven | Typing MSW mocks and axios calls from a generated OpenAPI contract: the shape, and six places a wrong body, field or route still gets through |
 | `frontend/form-labels.md` | proven | What Chrome's form label and id/name issues really mean, an audit that reproduces its counts, group captions, default ids, CSS-in-JS dropping `htmlFor` |
 
 ## Setup on a machine

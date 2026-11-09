@@ -89,6 +89,9 @@
     },
     "https://code.claude.com/docs/en/headless.md": {
       "sha256": "208eeb28afce5a433539821ec42ad3b077bb76420ee7ce6e21ce9cbe08cc2054"
+    },
+    "https://raw.githubusercontent.com/christoph-fricke/openapi-msw/main/README.md": {
+      "sha256": "4ba0564f718015a8bf9225764f9449cf2c93288aa6f6d11eca516aa9cba1d049"
     }
   }
 }
