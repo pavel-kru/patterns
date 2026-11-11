@@ -92,6 +92,12 @@
     },
     "https://raw.githubusercontent.com/christoph-fricke/openapi-msw/main/README.md": {
       "sha256": "4ba0564f718015a8bf9225764f9449cf2c93288aa6f6d11eca516aa9cba1d049"
+    },
+    "https://docs.npmjs.com/cli/v11/using-npm/config": {
+      "sha256": "a09b72c0fc1d1ea8853384c66b3f17b95861db194f4b00640088c5470e7a9bb4"
+    },
+    "https://raw.githubusercontent.com/npm/cli/latest/docs/lib/content/configuring-npm/package-json.md": {
+      "sha256": "32833f1e3b910cac4deaf7690ad8082eee5b25db262253a823572a9332910399"
     }
   }
 }
