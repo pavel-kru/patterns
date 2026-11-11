@@ -38,6 +38,7 @@ reviewed or reasoned, not yet proven.
 | File | Status | What it answers |
 |---|---|---|
 | `security/session-bridge.md` | candidate | Handing a legacy server session to an SPA and a new API without tokens in JS, and what a naive version misses |
+| `security/node-toolchain.md` | proven | Node and npm hardening for a front end that ships static files: making `engines` bite, `--ignore-scripts` without losing the git hooks, overriding a vulnerable nested dependency instead of `audit fix --force`, an audit gate |
 
 ## Front end
 

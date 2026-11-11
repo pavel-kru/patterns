@@ -188,6 +188,16 @@ first. **(opinion)**
   `fileInternalPath` is just the file name. Another slice's nested
   `model/index.ts` then passes as public API. **(verified on a fixture)** `mode`
   is also deprecated in v7 and prints a warning on every run. **(docs; verified)**
+  Don't swap it 1:1 for `partialMatch: false` and keep the `*/**` file patterns:
+  in one repo that gave 598 false "slice X → slice X" errors. Switch to the
+  folder patterns in the layer map above. **(verified: v7.4.2)** The plugin
+  appends `/**/*` to a `partialMatch: false` pattern itself, so the pattern must
+  name the element folder (`src/<layer>/*`), not its files. **(docs: the
+  `partialMatch` JSDoc in `@boundaries/elements` 7.4.2)** After the switch,
+  probe imports gave the same errors as under `mode: 'full'` (sideways, upward,
+  past the index and `shared` → `pages` fail; same-slice and through-the-index
+  pass), the warning was gone, and lint, tests and build stayed green.
+  **(verified: v7.4.2, both configs run on the same probes)**
 - **Set `partialMatch: false` explicitly.** The default matches the end of the
   path. The docs recommend `false` and expect the default to change in a future
   major version. **(docs)** With `false`, the same canary passed and the repo's
@@ -272,7 +282,12 @@ describe('fsd boundaries', { timeout: 60_000 }, () => {
 
 - Import targets must exist. The plugin skips an import it can't resolve, so an
   `allows` case would pass for the wrong reason. **(verified: the `allows` case
-  still passed with the resolver removed)**
+  still passed with the resolver removed)** A hand probe with a typo in the
+  target path passes the same way and looks like a hole in the rules. To tell
+  "allowed" from "skipped", run ESLint with `ESLINT_PLUGIN_BOUNDARIES_DEBUG=1`:
+  a skipped import's target has `"origin": "external"` and `"isUnknown": true`.
+  **(verified: v7.4.2, an `app` probe of a page file that didn't exist passed,
+  and the debug output showed it as external)**
 - `src` usually has no nested `index.ts` to test against. Test that case on a
   fixture tree that has its own `tsconfig.json`, the same elements and policies,
   and `boundaries/root-path` set to the fixture. **(verified)**
