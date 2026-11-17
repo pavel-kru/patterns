@@ -98,6 +98,9 @@
     },
     "https://raw.githubusercontent.com/npm/cli/latest/docs/lib/content/configuring-npm/package-json.md": {
       "sha256": "32833f1e3b910cac4deaf7690ad8082eee5b25db262253a823572a9332910399"
+    },
+    "https://code.claude.com/docs/en/sub-agents.md": {
+      "sha256": "5466954a992870d13715b1e5a933a49bebba9ddcfee2e72f7a19b3e4aacc6990"
     }
   }
 }
