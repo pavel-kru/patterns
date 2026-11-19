@@ -71,6 +71,45 @@ measured, hence `candidate`.
 
 ## Cost
 
-Moved to `claude-code/subagents.md`: which model a subagent runs on, deciding
+Where the money went on one day of a plan → build → review pipeline (planning
+and orchestrating sessions on the second-best model, builder subagents on a mid
+model, one long-lived reviewer session on the top model), priced at API rates
+from the transcripts' `usage` records **(verified: transcript analysis,
+2026-11-19, Claude Code 2.1.327)**:
+
+- **The orchestrator's context, not the reviewer's model, was the main cost.**
+  Orchestrating sessions took 52% of the day, the top-model reviewer 25%, all
+  builder subagents 22%, lookup subagents under 1%. **(verified)**
+- In the busiest orchestrating session 71% of the cost was re-reading its own
+  context: median 373k tokens a call over 561 calls, because one session ran
+  several tickets. A third of its calls produced under 300 output tokens
+  (status checks, relays) and still cost a quarter of the session. Capping the
+  context at 150k would have cut the re-reading by 60% (computed from the same
+  calls). **(verified: the numbers; the cap is a what-if, not a run)**
+- The reviewer paid mostly for what entered its context: 54% cache writes (new
+  files, diffs, excerpts), 25% re-reading, 21% output. **(verified)**
+- **Resuming a big idle session costs a full reload.** One message to a
+  460k-token session after a night idle wrote the whole context to cache again:
+  the most expensive single call of the day, before any work. Start a new
+  session instead of resuming a large one the next day. **(verified)**
+- Plan review was the cheapest step with the most effect: two rounds on one
+  plan cost about as much as one code-review round and produced eight required
+  changes before any code existed. Second code-review rounds almost always
+  only confirmed the fix. **(verified: per-turn cost; the judgement of the
+  findings is the reviewer's own)**
+- About a quarter of a day's code-review findings repeated a class of bug
+  found earlier that day in another task. **(verified: counted by the reviewer
+  from its own findings, not by a second party)** A short lessons file that
+  builders and the reviewer read first is the fix being tried. **(opinion,
+  not measured yet)**
+
+What follows from it **(opinion; applied 2026-11-19, savings not measured
+yet)**: one session per task with a small main thread on a mid model, the
+plan, a status note and the lessons file as the only hand-over, planner,
+builder and reviewer as defined subagents with their own models, the reviewer
+briefed with the task id, the spec path and the diff command only, and a
+second review round only for high and medium findings.
+
+Also in `claude-code/subagents.md`: which model a subagent runs on, deciding
 in the main thread and executing in a cheap subagent, and finding that work in
 transcripts.
